@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trang chủ</title>
+    <link rel="icon" href="/static/assets/images/education.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* CSS cho thanh điều hướng (nav) */
+        nav {
+            background-color: #4267B2;
+            color: black;
+            padding: 10px 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background-image: url('/static/assets/images/1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        nav a {
+            color: black;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* CSS cho phần thông tin người dùng và liên kết đăng nhập */
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .greeting {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .auth-links a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+
+        }
+
+        /* CSS cho tiêu đề và danh sách khóa học */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding-top: 60px;
+            background-image: url('/static/assets/images/4.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            font-weight: bold;
+            color: #333;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin-top: 5px;
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .header-text {
+            font-weight: bold;
+            color: transparent;
+            -webkit-text-stroke: .5px #111112;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin-top: 5px;
+            background-image: linear-gradient(#00e7f0, #0055f0);
+            background-repeat: no-repeat;
+            -webkit-background-clip: text;
+            background-position: -633px 0;
+            animation: animateText 6s linear infinite;
+        }
+
+        @keyframes animateText {
+            0%, 95%, 100% {
+                background-position: -633px 0;
+            }
+            65%, 85% {
+                background-position: 0 0;
+            }
+        }
+
+        .course-section {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 5px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-image: url('/static/assets/images/3.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-text {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .course-info {
+            flex-grow: 1;
+        }
+
+        .lesson-button {
+            background-color: #4d42b2bf;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 16px;
+            transition: background-color 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .lesson-button:hover {
+            background-color: purple;
+        }
+
+        .lesson-button:focus {
+            outline: none;
+        }
+
+        /* CSS cho footer */
+   footer {
+    background-color: #4267B2;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-image: url('/static/assets/images/1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+<!--    .home-sci{-->
+<!--    margin: 25px 0 40px;-->
+<!--}-->
+<!--.home-sci a{-->
+<!--    display: inline-flex;-->
+<!--    justify-content: center;-->
+<!--    align-items: center;-->
+<!--    width: 40px;-->
+<!--    height: 40px;-->
+<!--    background: transparent;-->
+<!--    border: 2px solid #fff;-->
+<!--    border-radius: 50%;-->
+<!--    font-size: 20px;-->
+<!--    color: #8300f0;-->
+<!--    text-decoration: none;-->
+<!--    margin-left: 12px;-->
+<!--    transition: .5s;-->
+<!--}-->
+<!--.home-sci a:hover{-->
+<!--    background-color: #8300f0;-->
+<!--    color: #fff;-->
+<!--    border-color: #8300f0;-->
+<!--    box-shadow: 0 0 10px #8300f0;-->
+<!--}-->
+    </style>
+    <script>
+        function goToLesson(lessonId) {
+            window.location.href = "/lessons/" + lessonId + "/";
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="home">
+                <a href="{% url 'home' %}" style="display: flex; align-items: center;"><img src="/static/assets/images/education.png" alt="Logo" width="50" height="50" style="margin-right: 10px;"><span> Trang chủ </span></a>
+            </div>
+            <div class="user-info">
+                {% if user.is_authenticated %}
+                <span class="greeting">Xin chào, {{ user.username }}!</span>
+                <div class="auth-links">
+                    <a href="{% url 'logout' %}">Đăng xuất</a>
+                </div>
+                {% else %}
+                <a href="{% url 'login' %}">Đăng nhập</a>
+                <a href="{% url 'signup' %}">Đăng ký</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    {% if user.is_authenticated %}
+    <div class="center-content">
+        <h1 class="header-text">CHÀO MỪNG TỚI KHÓA HỌC TIẾNG ANH</h1>
+        <h2>Danh sách khóa học</h2>
+    </div>
+    {% for course in courses %}
+    <section class="course-section">
+        <div class="course-text">
+            <h3>{{ course.title }}</h3>
+            <p>Người dạy: {{ course.instructor }}</p>
+            <p>Mô tả: {{ course.description }}</p>
+        </div>
+
+        <div class="enroll-button">
+            <a href="{% url 'course_lessons' course.id %}" onclick="goToLesson('{{ course.id }}')" class="lesson-button">Xem khóa học</a>
+        </div>
+    </section>
+    {% endfor %}
+    {% else %}
+    <p>Xin vui lòng đăng nhập hoặc đăng ký để xem danh sách khóa học.</p>
+    {% endif %}
+
+    <div style="height: 300px;"></div>
+    <footer>
+        <p>&copy; 2023 phap - Bản quyền thuộc về chúng tôi.</p>
+<!--         <div class="home-sci">-->
+<!--                <a href="https://www.facebook.com/profile.php?id=100007615306201" target="_blank"><i class='bx bxl-facebook-circle'></i></a>-->
+<!--                <a href="https://www.instagram.com/phap_0208/" target="_blank"><i class='bx bxl-instagram-alt'></i></a>-->
+<!--                <a href="https://github.com/phap0208" target="_blank"><i class='bx bxl-github'></i></a>-->
+<!--            </div>-->
+    </footer>
+</body>
+</html>

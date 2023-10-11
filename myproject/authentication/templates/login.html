@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Đăng Nhập</title>
+    <link rel="icon" href="/static/assets/images/ux.png" type="image/x-icon">
+    {% load static %}
+    <style>
+        body {
+             font-family: Arial, sans-serif;
+    background-image: url("{% static 'assets/images/1.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Vô hiệu hóa thanh trượt */
+        }
+
+        .container {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 87%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 16px;
+        }
+
+        button {
+            width: 95%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+          a {
+        text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
+        color: #333; /* Màu chữ mặc định */
+        transition: transform 0.2s; /* Tạo hiệu ứng chuyển đổi trong 0.2 giây */
+    }
+
+    /* CSS cho hiệu ứng hover */
+    a:hover {
+        color: blue; /* Màu chữ khi hover */
+        transform: scale(1.1); /* Phóng to liên kết khi hover */
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng Nhập</h2>
+        <form  method="post">
+            {% csrf_token %}
+
+            <label for="username">Tên đăng nhập:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Đăng Nhập</button>
+
+            <p>Nếu chưa có tài khoản, <a href="{% url 'signup' %}">Đăng Ký Ngay</a></p>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

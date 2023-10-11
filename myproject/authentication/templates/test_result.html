@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả bài kiểm tra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            font-size: 24px;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px;
+            margin-top: -10px;
+            margin-left: -10px;
+            margin-right: -10px
+        }
+        p {
+            font-size: 18px;
+            margin: 10px;
+        }
+        .result-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Kết quả bài kiểm tra</h1>
+    <div class="result-container">
+        <p>Bài kiểm tra: {{ test.title }}</p>
+        <p>Số câu trả lời đúng: {{ score }}</p>
+        <p>Thời gian bắt đầu: {{ test.start_time }}</p>
+        <p>Thời gian kết thúc: {{ test.end_time }}</p>
+    </div>
+
+</body>
+</html>

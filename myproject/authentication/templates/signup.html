@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Đăng Ký</title>
+     <link rel="icon" href="/static/assets/images/ux.png" type="image/x-icon">
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+    background-image: url("{% static 'assets/images/1.jpg' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Vô hiệu hóa thanh trượt */
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 16px;
+        }
+
+        button {
+            width: 96%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+        text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
+        color: #333; /* Màu chữ mặc định */
+        transition: transform 0.2s; /* Tạo hiệu ứng chuyển đổi trong 0.2 giây */
+    }
+
+    /* CSS cho hiệu ứng hover */
+    a:hover {
+        color: blue; /* Màu chữ khi hover */
+        transform: scale(1.1); /* Phóng to liên kết khi hover */
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post">
+            <h2>Đăng Ký Tài Khoản</h2>
+            {% csrf_token %}
+            <div class="form-group">
+                <label name="id_username">Tên đăng nhập:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label name="id_password1">Mật khẩu:</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label name="id_password2">Xác nhận mật khẩu:</label>
+                {{ form.password2 }}
+            </div>
+            <button type="submit">Đăng Ký</button>
+             {% if messages %}
+    {% endif %}
+            <p>Nếu đã có tài khoản, <a href="{% url 'login' %}">Đăng Nhập Ngay</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Kiểm Tra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        legend {
+            font-weight: bold;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        input[type="submit"] {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #005F82;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ test.title }}</h1>
+    <p>Time Left: <span id="timer">--:--</span></p>
+    <p>Start Time: {{ test.start_time }}</p>
+    <form method="post" action="{% url 'submit_test' test.id %}" id="quiz-form">
+        {% csrf_token %}
+        {% for question in questions %}
+            <fieldset>
+                <legend>{{ question.text }}</legend>
+                <label><input type="radio" name="question_{{ question.id }}" value="1"> {{ question.choice_1 }}</label><br>
+                <label><input type="radio" name="question_{{ question.id }}" value="2"> {{ question.choice_2 }}</label><br>
+                <label><input type="radio" name="question_{{ question.id }}" value="3"> {{ question.choice_3 }}</label><br>
+                <label><input type="radio" name="question_{{ question.id }}" value="4"> {{ question.choice_4 }}</label><br>
+            </fieldset>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+function updateTimer(endTime) {
+    var timerElement = document.getElementById("timer");
+
+    function update() {
+        var now = new Date();
+        var timeRemaining = new Date(endTime - now);
+
+        if (timeRemaining <= 0) {
+            clearInterval(interval);
+            timerElement.textContent = "Hết giờ!";
+            // Thực hiện hành động khi hết giờ (nếu cần)
+        } else {
+            var minutes = Math.floor(timeRemaining / 60000);
+            var seconds = Math.floor((timeRemaining % 60000) / 1000);
+
+            // Format thời gian
+            var formattedMinutes = minutes.toString().padStart(2, '0');
+            var formattedSeconds = seconds.toString().padStart(2, '0');
+
+            timerElement.textContent = formattedMinutes + ":" + formattedSeconds;
+        }
+    }
+
+    update(); // Gọi lần đầu để hiển thị thời gian ban đầu
+    var interval = setInterval(update, 1000); // Cập nhật thời gian mỗi giây
+}
+
+// Lấy thời gian kết thúc từ model Django (chú ý đảm bảo cung cấp đúng test ID)
+var endTimeString = "{{ test.end_time|date:'Y-m-d H:i:s' }}";
+var endTime = new Date(endTimeString);
+
+updateTimer(endTime);
+</script>
+
+</body>
+</html>

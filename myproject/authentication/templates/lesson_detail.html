@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ lesson.title }}</title>
+    <link rel="icon" href="/static/assets/images/education.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* CSS cho thanh điều hướng (nav) */
+        nav {
+            background-color: #4267B2;
+            color: black;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-image: url('/static/assets/images/1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        nav a {
+            color: black;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* Thay đổi màu và khoảng cách giữa các liên kết */
+        nav a:first-child {
+            margin-right: 10px; /* Khoảng cách bên phải của liên kết đầu tiên */
+            /* Màu nền của liên kết đầu tiên */
+            padding: 5px 10px; /* Khoảng cách bên trong của liên kết đầu tiên */
+            border-radius: 5px; /* Đường viền cong của liên kết đầu tiên */
+            transition: background-color 0.3s; /* Hiệu ứng màu nền khi hover */
+        }
+
+        /* CSS cho footer */
+        footer {
+            background-color: #4267B2;
+            color: black;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-image: url('/static/assets/images/1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* CSS cho nội dung bài học */
+        .lesson-content {
+            margin-top: 60px; /* Để tránh bị che bởi thanh điều hướng */
+            padding: 20px;
+            background-color: #f2f2f2;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        h1 {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .ckeditor-content {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* Liên kết đến bài học trước và tiếp theo */
+        .lesson-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .lesson-links a {
+            color: #4267B2;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .lesson-links a:hover {
+            color: #3a5a99;
+        }
+
+        /* Sử dụng media queries để điều chỉnh giao diện cho các thiết bị khác nhau */
+        @media (max-width: 768px) {
+            nav a {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+<!--        .home-sci a{-->
+<!--    display: inline-flex;-->
+<!--    justify-content: center;-->
+<!--    align-items: center;-->
+<!--    width: 40px;-->
+<!--    height: 40px;-->
+<!--    background: transparent;-->
+<!--    border: 2px solid #fff;-->
+<!--    border-radius: 50%;-->
+<!--    font-size: 20px;-->
+<!--    color: #8300f0;-->
+<!--    text-decoration: none;-->
+<!--    margin-left: 12px;-->
+<!--    transition: .5s;-->
+<!--}-->
+<!--.home-sci a:hover{-->
+<!--    background-color: #8300f0;-->
+<!--    color: #fff;-->
+<!--    border-color: #8300f0;-->
+<!--    box-shadow: 0 0 10px #8300f0;-->
+<!--}-->
+    </style>
+</head>
+<body>
+<nav>
+    <div>
+        <a href="{% url 'course_lessons' course.id %}" style="display: flex; align-items: center;">
+            <img src="/static/assets/images/back.png" alt="Logo" width="20" height="20" style="margin-right: 20px;">
+            <img src="/static/assets/images/education.png" alt="Logo" width="50" height="50" style="margin-right: 20px;">
+            <span>Trở về danh sách bài học</span>
+        </a>
+    </div>
+    <div>
+        {% if not lesson.has_quiz %}
+        <a href="{% url 'start_test' lesson.id %}" style="margin-right: 20px;">Làm bài kiểm tra</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="lesson-content">
+    <h1>{{ lesson.title }}</h1>
+    <div class="ckeditor-content">
+        {{ lesson.content | safe }}
+    </div>
+</div>
+
+<div style="height: 100px;"></div>
+<footer>
+        <p>&copy; 2023 phap - Bản quyền thuộc về chúng tôi.</p>
+<!--         <div class="home-sci">-->
+<!--                <a href="https://www.facebook.com/profile.php?id=100007615306201" target="_blank"><i class='bx bxl-facebook-circle'></i></a>-->
+<!--                <a href="https://www.instagram.com/phap_0208/" target="_blank"><i class='bx bxl-instagram-alt'></i></a>-->
+<!--                <a href="https://github.com/phap0208" target="_blank"><i class='bx bxl-github'></i></a>-->
+<!--            </div>-->
+    </footer>
+</body>
+</html>
